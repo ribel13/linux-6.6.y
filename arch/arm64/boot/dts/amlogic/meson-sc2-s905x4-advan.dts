@@ -401,8 +401,11 @@
 }; /* end of periphs_pinctrl */
 
 &usb {
-	status = "okay";
+    vusb_d-supply = <&vusb_d>;
+    vusb_a-supply = <&vusb_a>;
+    status = "okay";
 };
+
 
 /* SDIO */
 &sd_emmc_a {
