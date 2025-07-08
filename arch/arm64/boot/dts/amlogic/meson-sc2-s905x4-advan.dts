@@ -511,4 +511,12 @@ vusb_d: regulator-vusb_d {
     regulator-always-on;
 };
 
+vusb_a: regulator-vusb_a {
+    compatible = "regulator-fixed";
+    regulator-name = "vusb_a";
+    regulator-min-microvolt = <5000000>;
+    regulator-max-microvolt = <5000000>;
+    regulator-always-on;
+};
+
 };
