@@ -473,17 +473,12 @@
 &ethmac {
     status = "okay";
     phy-mode = "rmii";
-    phy-handle = <&internal_phy>;
+    phy-handle = <&internal_ephy>;
 
     fixed-link {
         speed = <100>;
         full-duplex;
     };
-};
-
-internal_phy: ethernet-phy@8 {
-    reg = <8>;
-    compatible = "ethernet-phy-ieee802.3-c22";
 };
 
 
