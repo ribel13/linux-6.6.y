@@ -201,7 +201,6 @@
 			linux,default-trigger = "default-on";
 		};
 	};
-};
 
 /* 
  * Simpan node I²C asli untuk fd6551 atau perangkat lain.
