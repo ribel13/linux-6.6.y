@@ -31,6 +31,8 @@
 		i2c4 = &i2c4;
 		spi1 = &spicc0;
 		spi2 = &spicc1;
+        led-boot = &led_red;
+		led-running = &led_blue;
 	};
 
 	memory {
@@ -182,6 +184,29 @@
 		compatible = "amlogic,cpufreq-meson";
 		status = "okay";
 	};
+
+    leds {
+		compatible = "gpio-leds";
+
+		led_blue: blue {
+			label = "blue:status";
+			gpios = <&gpio GPIOH_6 GPIO_ACTIVE_HIGH>;
+			default-state = "on";  /* nyala saat sistem hidup */
+		};
+
+		led_red: red {
+			label = "red:boot";
+			gpios = <&gpio GPIOH_7 GPIO_ACTIVE_HIGH>;
+			default-state = "on";  /* nyala saat boot */
+			linux,default-trigger = "default-on";
+		};
+	};
+};
+
+/* 
+ * Simpan node I²C asli untuk fd6551 atau perangkat lain.
+ * Hanya menonaktifkan LED dari fd6551 jika sebelumnya digunakan.
+ */
 	
 	i2c-led {
 		compatible = "i2c-gpio";
