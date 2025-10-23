@@ -1,0 +1,48 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * LED GPIO patch for Advan AT01 (S905X4)
+ * Adds blue and red LED controlled via GPIO instead of fd6551
+ */
+
+#include "meson-sc2.dtsi"
+
+/ {
+	model = "Advan AT01 (S905X4) - LED GPIO Version";
+	compatible = "advan,at01-led", "amlogic,sc2";
+
+	aliases {
+		led-boot = &led_red;
+		led-running = &led_blue;
+	};
+
+	leds {
+		compatible = "gpio-leds";
+
+		led_blue: blue {
+			label = "blue:status";
+			gpios = <&gpio GPIOH_6 GPIO_ACTIVE_HIGH>;
+			default-state = "on";  /* nyala saat sistem hidup */
+		};
+
+		led_red: red {
+			label = "red:boot";
+			gpios = <&gpio GPIOH_7 GPIO_ACTIVE_HIGH>;
+			default-state = "on";  /* nyala saat boot */
+			linux,default-trigger = "default-on";
+		};
+	};
+};
+
+/* 
+ * Simpan node I²C asli untuk fd6551 atau perangkat lain.
+ * Hanya menonaktifkan LED dari fd6551 jika sebelumnya digunakan.
+ */
+&i2c_a {
+	status = "okay";
+
+	fd6551: led-controller@38 {
+		compatible = "fd6551";
+		reg = <0x38>;
+		status = "disabled"; /* Nonaktifkan supaya tidak bentrok dengan GPIO LED */
+	};
+};
