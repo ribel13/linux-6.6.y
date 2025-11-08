@@ -25,7 +25,7 @@ on:
         default: "6.6.y"
         type: choice
         options:
-          - 6.6.y
+          - 6.6.92
       kernel_auto:
         description: "Auto use the latest kernel"
         required: false
